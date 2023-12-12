@@ -1,5 +1,6 @@
 package com.example.springjava.controller;
 
+import com.example.springjava.dto.GroupTestDto;
 import com.example.springjava.model.GroupTest;
 import com.example.springjava.service.GroupTestService;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +23,10 @@ public class GroupTestController {
     @PostMapping
     public GroupTest save(@RequestBody GroupTest groupTest){
         return service.save(groupTest);
+    }
+
+    @PutMapping("/update/{id}")
+    public void update(@RequestBody GroupTestDto groupTestDto,@PathVariable Long id){
+         service.updateGroup(id,groupTestDto);
     }
 }
