@@ -14,8 +14,8 @@
 
 version: "3.8"
 services:
-  api_service:
-    image: app
+  java-service:
+    image: docker
     build:
       context: .
       dockerfile: Dockerfile
@@ -27,12 +27,12 @@ services:
     environment:
       - spring.datasource.url=jdbc:postgresql://postgresqldb:5432/test
     depends_on:
-      - postgresqldb
+      - mysqldb
     volumes:
       - .m2:/root/.m2
 
-  postgresqldb:
-    image: "postgres"
+  mysqldb:
+    image: "mysql"
     restart: always
     ports:
       - 5433:5432
