@@ -1,0 +1,47 @@
+#services:
+#  app:
+#    entrypoint:
+#    - sleep
+#    - infinity
+#    image: docker/dev-environments-java:stable-1
+#    init: true
+#    volumes:
+#    - type: bind
+#      source: /var/run/docker.sock
+#      target: /var/run/docker.sock
+#
+
+
+version: "3.8"
+services:
+  api_service:
+    image: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8090:8080
+    networks:
+      - springapipostgresql-net
+    environment:
+      - spring.datasource.url=jdbc:postgresql://postgresqldb:5432/test
+    depends_on:
+      - postgresqldb
+    volumes:
+      - .m2:/root/.m2
+
+  postgresqldb:
+    image: "postgres"
+    restart: always
+    ports:
+      - 5433:5432
+    networks:
+      - springapipostgresql-net
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+
+networks:
+  springapipostgresql-net:
