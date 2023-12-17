@@ -17,7 +17,6 @@ public class GroupTestController {
 
     @GetMapping("/get-all")
     public List<GroupTest> getAll() {
-        System.out.println("Hello dockerize with spring boot");
         return service.getAll();
     }
 

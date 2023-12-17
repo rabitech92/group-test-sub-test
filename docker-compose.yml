@@ -35,7 +35,7 @@ services:
     image: "mysql"
     restart: always
     ports:
-      - 5433:5432
+      - 543:5432
     networks:
       - springapipostgresql-net
     environment:
